@@ -17,10 +17,12 @@ spec:
     spec:
       containers:
       - name: instagram-recipe-parser-ui
-        image: 135234974038.dkr.ecr.us-east-1.amazonaws.com/instagram_recipe_parser_ui:4be9bbd
+        image: 135234974038.dkr.ecr.us-east-1.amazonaws.com/instagram_recipe_parser_ui:5f4b95c
         ports:
         - name: http
           containerPort: 80
+        - name: https
+          containerPort: 443
         imagePullPolicy: IfNotPresent
         resources:
           requests:
