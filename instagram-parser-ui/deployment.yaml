@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instagram-recipe-parser-ui-deployment
+  namespace: insta-parser
+  labels:
+    app: instagram-recipe-parser-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: instagram-recipe-parser-ui
+  template:
+    metadata:
+      labels:
+        app: instagram-recipe-parser-ui
+    spec:
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: kubernetes.io/arch
+      #           operator: In
+      #           values:
+      #           - amd64
+      #           - arm64
+      containers:
+      - name: instagram-recipe-parser-ui
+        image: 135234974038.dkr.ecr.us-east-1.amazonaws.com/instagram_recipe_parser_ui:4be9bbd
+        ports:
+        - name: http
+          containerPort: 80
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      nodeSelector:
+        kubernetes.io/os: linux

@@ -30,7 +30,7 @@ spec:
         image: 135234974038.dkr.ecr.us-east-1.amazonaws.com/instagram_recipe_parser:a619f91
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 8080
         imagePullPolicy: IfNotPresent
       nodeSelector:
         kubernetes.io/os: linux
