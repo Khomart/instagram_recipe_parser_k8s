@@ -32,5 +32,10 @@ spec:
         - name: http
           containerPort: 8080
         imagePullPolicy: IfNotPresent
+        env:
+        - name: OPENAI_API_KEY
+          value: dummy
+        - name: ALLOWED_EMAILS
+          value: "dummy"
       nodeSelector:
         kubernetes.io/os: linux
